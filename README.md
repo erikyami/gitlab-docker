@@ -5,12 +5,12 @@
 
 ### Criar diretório para armazenamento dos dados
 
-´´´
+```
 mkdir /srv/dados
-´´´
+```
 
 
-´´´
+```
 #/bin/bash
 
 # Configurar variáveis
@@ -30,4 +30,4 @@ docker run --detach \
 	--volume ${GITLAB_HOME}/gitlab/logs:/var/log/gitlab:Z \
 	--volume ${GITLAB_HOME}/gitlab/data:/var/opt/gitlab:Z \
 	gitlab/gitlab-ce:latest
-´´´
+```
