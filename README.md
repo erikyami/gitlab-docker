@@ -1,5 +1,9 @@
 # gitlab-docker
 
+## Sobre o projeto
+Este projeto tem como objetivo a instalação local de uma instância do GitLab rodando sobre uma infraestrutura em containers. Bem como configuração do GitLab Runner também em containers.
+
+
 ## Instalação do Gitlab em ambiente docker
 
 
