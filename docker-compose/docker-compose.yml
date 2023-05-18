@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+  web:
+    image: 'gitlab/gitlab-ee:latest'
+    restart: always
+    hostname: 'gitlab.hl.local'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.hl.local'
+        letsencrypt['enable'] = false
+        nginx['ssl_certificate'] = "/etc/gitlab/ssl/wildcard.hl.local.crt"
+        nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/wildcard.hl.local.key"
+        #Regustry
+        registry_external_url 'https://registry.hl.local'
+        registry_nginx['ssl_certificate'] = "/etc/gitlab/ssl/wildcard.hl.local.crt"
+        registry_nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/wildcard.hl.local.key"
+        gitlab_rails['registry_enabled'] = true
+        gitlab_rails['registry_host'] = "registry.hl.local"
+        gitlab_rails['registry_port'] = "443"
+        gitlab_rails['registry_path'] = "/var/opt/gitlab/gitlab-rails/shared/registry"
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - '80:80'
+      - '443:443'
+      - '22:22'
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    shm_size: '256m'
